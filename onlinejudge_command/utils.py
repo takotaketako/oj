@@ -189,6 +189,8 @@ def webbrowser_register_explorer_exe() -> None:
 
     if not is_windows_subsystem_for_linux():
         return
+    if os.getenv('REMOTE_CONTAINERS', '').lower() == "true":
+        return
     instance = webbrowser.GenericBrowser('explorer.exe')
     webbrowser.register('explorer', None, instance, preferred=True)  # `preferred=True` solves the issue that terminal logs are cleared on cmd.exe with stopping using wslview via www-browser. TODO: remove `preferred=True` after https://github.com/wslutilities/wslu/issues/199 is fixed.
 
